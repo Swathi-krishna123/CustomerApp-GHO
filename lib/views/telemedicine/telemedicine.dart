@@ -163,7 +163,7 @@ class Telemedicine extends StatelessWidget {
                   onTap: () => Get.toNamed(PageRouteName.doctordetail),
                   child: Container(
                     width: double.infinity,
-                    height: 195.h,
+                    height: 205.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
                         boxShadow: const [
@@ -234,38 +234,41 @@ class Telemedicine extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                              SizedBox(height: 10,),
                             ],
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 28,
-                                backgroundImage: AssetImage(
-                                    'assets/images/telemedicine/tele-img-1.png'),
-                              ),
-                              SizedBox(
-                                width: 15.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    'Dr Merin Jacob',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
+                          Expanded(
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 28,
+                                  backgroundImage: AssetImage(
+                                      'assets/images/telemedicine/tele-img-1.png'),
+                                ),
+                                SizedBox(
+                                  width: 15.w,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'Dr Merin Jacob',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    'Pediatrics',
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                ],
-                              )
-                            ],
+                                    Text(
+                                      'Pediatrics',
+                                      style: TextStyle(color: Colors.black),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),

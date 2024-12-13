@@ -157,7 +157,7 @@ class SpecialitityDetail extends StatelessWidget {
                               'Audio';
                         },
                         child: Container(
-                          height: 191.h,
+                          height: 250.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: AppUtil().customBlue),
@@ -242,7 +242,7 @@ class SpecialitityDetail extends StatelessWidget {
                                     .selectedAppointment.value = 'Video';
                               },
                               child: Container(
-                                height: 191.h,
+                                height: 250.h,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.r),
                                     color: telemedicinecontroller

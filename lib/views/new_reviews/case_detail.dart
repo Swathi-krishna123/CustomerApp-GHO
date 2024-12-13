@@ -23,13 +23,29 @@ class _CaseDetailState extends State<CaseDetail> {
   String? token;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
+    // Generate token (ensure it's async if needed)
     tokengenerate();
-    print(controller.userInfoList);
-    print(controller.uploadFilesList[0].FileName);
+
+    // Ensure controller lists are not null or empty
+    if (controller.userInfoList.isNotEmpty) {
+      print(controller.userInfoList);
+    } else {
+      print("User info list is empty or null.");
+    }
+
+    if (controller.uploadFilesList.isNotEmpty) {
+      print(controller.uploadFilesList[0].FileName);
+    } else {
+      print("Upload files list is empty or null.");
+    }
+
+    // Listen to audio playback event
     audioPlayer.playbackEventStream.listen((event) {
+      // Add some condition or logging to confirm what event is being triggered
       controller.isPlaying.value = false;
+      print("Audio playback event: $event");
     });
   }
 
@@ -129,7 +145,8 @@ class _CaseDetailState extends State<CaseDetail> {
                       text: 'Submitted On: ',
                       color: Colors.grey,
                     ),
-                    caseDetailsSubtitile(text: '06/10/2024', color: Colors.grey),
+                    caseDetailsSubtitile(
+                        text: '06/10/2024', color: Colors.grey),
                   ],
                 ),
                 Row(
@@ -151,8 +168,8 @@ class _CaseDetailState extends State<CaseDetail> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      border:
-                          Border.all(color: AppUtil().containerColor, width: 2)),
+                      border: Border.all(
+                          color: AppUtil().containerColor, width: 2)),
                   child: Padding(
                     padding: EdgeInsets.all(12.0).r,
                     child: Column(
@@ -189,10 +206,12 @@ class _CaseDetailState extends State<CaseDetail> {
                                     : 'Female'),
                         personalInfoTile(
                             title: 'Cell Phone : ',
-                            responseValue: controller.userInfoList[0].CellPhone),
+                            responseValue:
+                                controller.userInfoList[0].CellPhone),
                         personalInfoTile(
                             title: 'Occupation : ',
-                            responseValue: controller.userInfoList[0].Occupation),
+                            responseValue:
+                                controller.userInfoList[0].Occupation),
                       ],
                     ),
                   ),
@@ -225,10 +244,12 @@ class _CaseDetailState extends State<CaseDetail> {
                           child: Text(
                             controller.specialtyList.isEmpty
                                 ? "Podiatory"
-                                : controller.specialtyList[index].SpecialtyName!,
+                                : controller
+                                    .specialtyList[index].SpecialtyName!,
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: MediaQuery.of(context).size.width / 35),
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 35),
                           ),
                         ),
                       );
@@ -245,8 +266,9 @@ class _CaseDetailState extends State<CaseDetail> {
                     (controller.userInfoList[0].MedicalSummary?.isEmpty ?? true)
                         ? 'No Medical Summary'
                         : controller.userInfoList[0].MedicalSummary!,
-                    maxLines:
-                        controller.isExpanded.value ? null : controller.maxlines,
+                    maxLines: controller.isExpanded.value
+                        ? null
+                        : controller.maxlines,
                     overflow: controller.isExpanded.value
                         ? TextOverflow.visible
                         : TextOverflow.ellipsis,
@@ -255,7 +277,7 @@ class _CaseDetailState extends State<CaseDetail> {
                 Obx(() {
                   final medicalSummary =
                       controller.userInfoList[0].MedicalSummary;
-            
+
                   // Check if `medicalSummary` is not null and not empty, and its length is greater than 100
                   if (medicalSummary != null &&
                       medicalSummary.isNotEmpty &&
@@ -275,14 +297,14 @@ class _CaseDetailState extends State<CaseDetail> {
                   }
                 }),
                 AppUtil().h10,
-            
+
                 Row(
                   children: [
                     GestureDetector(
                       onTap: () async {
                         controller.isLoading.value = true;
                         String downloadUrl = '';
-            
+
                         // Check if the file is an m4a file
                         if (controller.uploadFilesList.isNotEmpty &&
                             controller.uploadFilesList[0].FileName!
@@ -293,7 +315,7 @@ class _CaseDetailState extends State<CaseDetail> {
                                 await controller.getboxFilePreviewDownloadURl(
                                     controller.uploadFilesList[0].fl);
                           }
-            
+
                           String localpath = '';
                           if (downloadUrl.isNotEmpty) {
                             localpath = await CommonWidgets().downloadFile(
@@ -301,7 +323,7 @@ class _CaseDetailState extends State<CaseDetail> {
                               filename: controller.uploadFilesList[0].FileName,
                             );
                           }
-            
+
                           if (localpath.isNotEmpty) {
                             if (audioPlayer.playing) {
                               audioPlayer.stop();
@@ -348,8 +370,8 @@ class _CaseDetailState extends State<CaseDetail> {
                                           ? Text('No Recorded Summary')
                                           : Text(
                                               '${controller.uploadFilesList[0].FileName!.substring(0, 8)}...${controller.uploadFilesList[0].FileName!.split('_').last}',
-                                              style:
-                                                  TextStyle(color: Colors.black),
+                                              style: TextStyle(
+                                                  color: Colors.black),
                                             ),
                                     ],
                                   ),
@@ -384,15 +406,16 @@ class _CaseDetailState extends State<CaseDetail> {
                               controller.downloadingFileIndex.value = index;
                               String downloadUrl = '';
                               if (token!.isNotEmpty) {
-                                downloadUrl =
-                                    await controller.getboxFilePreviewDownloadURl(
+                                downloadUrl = await controller
+                                    .getboxFilePreviewDownloadURl(
                                         filteredFilesList[index].fl);
                               }
                               String localpath = '';
                               if (downloadUrl.isNotEmpty) {
                                 localpath = await CommonWidgets().downloadFile(
                                     downloadUrl,
-                                    filename: filteredFilesList[index].FileName);
+                                    filename:
+                                        filteredFilesList[index].FileName);
                               }
                               if (localpath.isNotEmpty) {
                                 CommonWidgets().openFile(localpath);

@@ -113,7 +113,7 @@ class Inpatient extends StatelessWidget {
                         ),
                       )),
                   Padding(
-                    padding: const EdgeInsets.only(left: 25, top: 30),
+                    padding: const EdgeInsets.only(left: 25, top: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

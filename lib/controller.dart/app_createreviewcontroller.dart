@@ -560,7 +560,7 @@ class CreateReviewController extends GetxController {
   getfileUploadtokenBox() async {
     var response = await DioHandler.dioPOSTGetTOken(
         path:
-            'https://rereadmedical.azurewebsites.net/api/box/get-file-upload-token');
+            'https://gho.azurewebsites.net/api/box/get-file-upload-token');
     var token = response["AccessTokenField"];
     print(token);
     return token;
@@ -706,7 +706,7 @@ class CreateReviewController extends GetxController {
   boxFilePreviewtoken() async {
     var response = await DioHandler.dioPOSTGetTOken(
         path:
-            'https://rereadmedical.azurewebsites.net/api/box/get-file-preview-token');
+            'https://gho.azurewebsites.net/api/box/get-file-preview-token');
     var token = response["AccessTokenField"];
     print(token);
     return token;
@@ -715,7 +715,7 @@ class CreateReviewController extends GetxController {
   getboxFilePreviewDownloadURl(String? fileID) async {
     var body = {"ReviewFileId": fileID};
     String url =
-        'https://rereadmedical.azurewebsites.net/api/box/get-shared-url';
+        'https://gho.azurewebsites.net/api/box/get-shared-url';
     var response = await DioHandler.dioPOSTGetTOken(body: body, path: url);
     var downloadUrl = response['SharedLink']['DownloadUrl'];
     print(downloadUrl);
